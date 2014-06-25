@@ -8,6 +8,7 @@ Since this was not a real project, just a challenge, I took the liberty of filli
 Were this to have been a real project I would have clarified first.
 
 The details were:
+
 1. How deep the nesting could be? I decided to keep it simple at one level deep.
 2. Could an item be both a trigger to open a sub-menu as well as a link itself? I decided no.
 3. Connected to #2, could top level menu items be ordinary links? I decided yes.
