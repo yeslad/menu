@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="utf-8">
+<title>Test</title>
+<style>
+.box {
+  position: relative;
+  width: 70%;
+  height: 44px;
+  border: 1px solid rgba(0,0,0,0.1);
+  margin: auto;
+  border-radius: 3px;
+  webkit-box-shadow: none;
+  font: 600 1.1em Arial, sans-serif;
+  box-shadow: none;
+  background-color: #f5f5f5;
+  background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+  background-image: -moz-linear-gradient(top,#f5f5f5,#f1f1f1);
+  background-image: -ms-linear-gradient(top,#f5f5f5,#f1f1f1);
+  background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
+}
+.box ul {
+  list-style: none;
+  padding: 0;
+  display: block;
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+}
+.box ul li {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  color: #8F8F8F;
+  position: relative;
+  padding: 0 3%;
+}
+.box ul li a {
+  text-decoration: none;
+  color: #8F8F8F;
+  width: 100%;
+}
+.box ul li ul {
+  display: none;
+  position: absolute;
+  background-image: none;
+  background: #FFF;
+  width: 130px;
+  right: 35%;
+  top: 12px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.box ul li ul:before,
+.box ul li ul:after {
+  bottom: 100%;
+  right: 15%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.box ul li ul:after {
+  border-bottom-color: #FFF;
+  border-width: 7px;
+  margin-left: -7px;
+}
+.box ul li ul:before {
+  border-bottom-color: rgba(0,0,0,0.1);
+  border-width: 8px;
+  margin-left: -8px;
+}
+.box ul li:hover > ul,
+.box ul li > ul:hover {
+  display: block;
+}
+.box ul li ul li {
+  display: block;
+  padding: 10px 2px;
+  border-bottom: 1px solid #E4E4FF;
+}
+.box ul li ul li:last-child {
+  border-bottom: none;
+}
+.box ul li ul li a {
+  color: rgba(0, 0, 240, 0.45);
+}
+.box ul li ul li:hover a {
+  color: rgba(0, 0, 240, 1);
+}
+.drop-shadow:before,
+.drop-shadow:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 6px;
+  top: 48%;
+  width: 50%;
+  height: 18%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+.drop-shadow:after{
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 6px;
+  left: auto;
+}
+.form {
+  margin-top: 100px;
+  text-align: center;
+}
+#removing, #sub {
+	display: none;
+}
+</style>
+</head>
+<body dir="rtl">
+	<nav class="box drop-shadow">
+		<ul id="navmenu">
+			<li id="top-1">אודות
+				<ul>
+					<li id="sub-1-10"><a href="#">דת</a></li>
+					<li id="sub-1-11"><a href="#">חינוך</a></li>
+				</ul>
+			</li>
+			<li id="top-2">חסד
+				<ul>
+					<li id="sub-2-12"><a href="#">דת</a></li>
+					<li id="sub-2-13"><a href="#">חינוך</a></li>
+				</ul>
+			</li>
+			<li id="top-3">ועדות הישוב
+				<ul>
+					<li id="sub-3-14"><a href="#">דת</a></li>
+					<li id="sub-3-15"><a href="#">חינוך</a></li>
+				</ul>
+			</li>
+			<li id="top-4">חברה
+				<ul>
+					<li id="sub-4-16"><a href="#">דת</a></li>
+					<li id="sub-4-17"><a href="#">חינוך</a></li>
+				</ul>
+			</li>
+			<li id="top-5"><a href="#">עסקים</a></li>
+			<li id="top-6"><a href="#">תחבורה</a></li>
+			<li id="top-7"><a href="#">מבנה פיס</a></li>
+			<li id="top-8"><a href="#">מספר טלפונים</a></li>
+		</ul>
+	</nav>
+	<div class="form" dir="ltr" lang="en">
+		<p>Action: 
+			<label><input type="radio" name="action" value="add" checked> Add Item</label>
+			<label><input type="radio" name="action" value="remove"> Remove Item</label>
+		</p>
+		<div id="adding">
+		  	<form action="/update_menu/add" method="post" id="add-form">
+				<p>Type: 
+					<label><input type="radio" name="type" value="top" checked> Top Level</label>
+					<label><input type="radio" name="type" value="sub"> Sub Item</label>
+				</p>
+				<p id="sub">
+					<label for="parent_id">Top Level Parent: </label>
+					<select id="parent_id" name="parent_id">
+						<option value="1">אודות</option> <!-- this would be dynamically populated by pulling the current items from the DB -->
+						<option value="2">חסד</option>
+						<option value="3">ועדות ישוב</option>
+						<option value="4">חברה</option>
+					</select>
+				</p>
+				<p><input type="text" name="text" id="text" placeholder="Anchor Text"></p>
+				<p><input type="text" name="href" id="href" placeholder="href"></p>
+				<p>Nofollow:
+					<label><input type="radio" name="nofollow" value="1" checked> Yes</label>
+					<label><input type="radio" name="nofollow" value="0"> No</label>
+				</p>
+				<p>
+					<select name="target" id="target">
+						<option value="blank">blank</option>
+						<option value="top">top</option>
+						<option value="self">self</option>
+						<option value="parent">parent</option>
+					</select>
+				</p>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+		<div id="removing">
+			<form action="/update_menu/rem" method="post" id="rem-form">
+				<label for="rem_item">Select an item to remove: </label>
+				<select id="rem_item">
+					<option value="1">אודות</option> <!-- this would be dynamically populated by pulling the current items from the DB -->
+					<option value="2">חסד</option>
+					<option value="3">ועדות ישוב</option>
+					<option value="4">חברה</option>
+					<option value="10">אודות - דת</option>
+					<option value="11">אודות - חינוך</option>
+					<option value="12">חסד - דת</option>
+					<option value="13">חסד - חינוך</option>
+					<option value="14">ועדות ישוב - דת</option>
+					<option value="15">ועדות ישוב - חינוך</option>
+					<option value="16">חברה - דת</option>
+					<option value="17">חברה - חינוך</option>
+				</select>
+				<p>Note: deleting a top level item will remove all sub itmes as well</p>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script>
+	  (function($) {
+	    $('[name=action]').change(function() {
+	    	$('#adding,#removing').toggle();
+	    });
+	    $('[name=type]').change(function() {
+	    	$('#sub').toggle();
+	    });
+	    $('#add-form').submit(function(e) {
+	      e.preventDefault();
+	      var $this = $(this),
+        	parent =  ($('[name=type]:checked').val() == 'sub' ? $('#parent_id').val() : false),
+        	text = $('#text').val(),
+        	href = $('#href').val(),
+        	nofollow = $('[name=nofollow]:checked').val(),
+        	target = $('#target').val();
+		  if (!text) {
+		    alert('Anchor text required');
+		    return false;
+		  }
+		  if (parent && !href) {
+		    alert('Sub item requires href');
+		    return false;
+		  }
+ 	      $.post($this.attr('action'), $this.serialize(), function(d) { // server return JSON, d.status code 200 or 0 for success or fail
+	        if (d.status == 200) {
+          	  if (href) { // is a link
+	            var link = '<a href="'+href+'" target="_'+target+'"'+(+nofollow ? ' rel="nofollow"' : '')+'>'+text+'</a></li>', appendTo, option, parent_name;
+	            if (parent) {
+	              parent_name = $('#parent_id option[value='+parent+']').text();
+	              link = '<li id="sub-'+parent+'-'+d.id+'">'+link;
+	          	  appendTo = '#top-'+parent+' ul';
+	          	  option = '<option value="'+d.id+'">'+parent_name+' - '+text+'</option>';
+	          	} else {
+	          	  link = '<li id="top-'+d.id+'">'+link;
+	          	  appendTo = '#navmenu';
+	          	  option = '<option value="'+d.id+'">'+text+'</option>';
+	          	}
+	          	$(appendTo).append(link);
+	          } else {
+	            $('#navmenu').append('<li id="top-'+d.id+'">'+text+'<ul></ul></li>'); // update menu
+	          	$('#parent_id').append(option); // update top level select menu
+	          }
+	          $('#rem_item').append(option); // update remove item dropdown
+	          $('input[type=text]',$this).val('');
+	        } else {
+	          alert('An error occurred');
+	        }
+	      }, 'json');
+	    });
+	    $('#rem-form').submit(function(e) {
+	      e.preventDefault();
+	      var $this = $(this),
+	        remove = $('#rem_item').val();
+	      $.post($this.attr('action'), {rem_item: remove}, function(d) { // server return JSON, d.status code 200 or 0 for success or fail
+	        if (d.status == 200) {
+	          if (d.parent_id) { // sub item - server returns parent_id
+	            var id = '#sub-'+d.parent_id+'-'+remove;
+	          } else {
+	            var id = '#top-'+remove;
+	            // need to remove all sub items from remove dropdown
+	            if (d.children && d.children.length) {
+	              $.each(d.children, function(i,v) { // d.children returned by server - array of children ids
+	                $('#rem_item option[value='+v+']').remove();
+	              });
+	            }
+	          }
+	          $(id).remove();
+	          $('#rem_item option[value='+remove+'], #parent_id option[value='+remove+']').remove();
+	        } else {
+	          alert('An error occurred');
+	        }
+	      }, 'json');
+	    });
+	  }(jQuery));		
+	</script>
+</body>
+</html>
